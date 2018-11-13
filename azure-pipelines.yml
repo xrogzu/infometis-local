@@ -7,7 +7,7 @@ pool:
   vmImage: 'Ubuntu 16.04'
 
 variables:
-  registry: 'vc11web'
+  registry: 'hvbnext'
   imageName: 'infometis-local'
   imageTag: 'v1'
 
