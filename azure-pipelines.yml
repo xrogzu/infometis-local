@@ -60,6 +60,6 @@ steps:
 # Build main container image - infometis-local
 - script: |
     cd $(imageName)
-    docker build -t $(registry)/$(imageName):$(imageTag) .
+    docker build -t $(registry)/$(imageName):$(imageTag) . --build-arg REGISTRY=$(registry)
     docker push $(registry)/$(imageName):$(imageTag)
   displayName: 'Build & Push main image'

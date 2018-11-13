@@ -1,4 +1,5 @@
-FROM vc11web/container-wrapper:v1
+ARG REGISTRY=invalid
+FROM $REGISTRY/container-wrapper:v1
 
 COPY container-wrapper/docs/cli/help.txt container-wrapper/docs/cli/help.txt
 
