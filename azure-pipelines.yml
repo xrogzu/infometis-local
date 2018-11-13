@@ -1,0 +1,65 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+pool:
+  vmImage: 'Ubuntu 16.04'
+
+variables:
+  registry: 'vc11web'
+  imageName: 'infometis-local'
+  imageTag: 'v1'
+
+steps:
+- script: docker login -u $(registry) -p $(dockerpwd) 
+  displayName: 'docker login'
+
+# Build image - filebeat docker
+- script: |
+    cd filebeat-docker
+    docker build -t $(registry)/filebeat:docker . --build-arg REGISTRY=$(registry)
+    docker push $(registry)/filebeat:docker
+  displayName: 'Build & Push filebeat:docker image'
+
+# Build image - grafana local
+- script: |
+    cd grafana
+    docker build -t $(registry)/grafana:local . --build-arg REGISTRY=$(registry)
+    docker push $(registry)/grafana:local
+  displayName: 'Build & Push grafana:local image'
+
+# Build image - kibana local 
+- script: |
+    cd kibana-local
+    docker build -t $(registry)/kibana:local . --build-arg REGISTRY=$(registry)
+    docker push $(registry)/kibana:local
+  displayName: 'Build & Push kibana:local image'
+
+# Build image - metricbeat local 
+- script: |
+    cd metricbeat-local
+    docker build -t $(registry)/metricbeat:local . --build-arg REGISTRY=$(registry)
+    docker push $(registry)/metricbeat:local
+  displayName: 'Build & Push metricbeat:local image'
+
+# Build image - streamsets dev
+- script: |
+    cd streamsets-dev
+    docker build -t $(registry)/streamsets:dev . --build-arg REGISTRY=$(registry)
+    docker push $(registry)/streamsets:dev
+  displayName: 'Build & Push streamsets:dev image'
+
+# Build image - streamsets local 
+- script: |
+    cd streamsets-local
+    docker build -t $(registry)/streamsets:local . --build-arg REGISTRY=$(registry)
+    docker push $(registry)/streamsets:local
+  displayName: 'Build & Push streamsets:local image'
+
+# Build main container image - infometis-local
+- script: |
+    cd $(imageName)
+    docker build -t $(registry)/$(imageName):$(imageTag) .
+    docker push $(registry)/$(imageName):$(imageTag)
+  displayName: 'Build & Push main image'
