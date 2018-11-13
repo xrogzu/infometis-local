@@ -66,6 +66,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
+  "iteration": 1542128519315,
   "links": [],
   "panels": [
     {
@@ -148,7 +149,7 @@
               "type": "count"
             }
           ],
-          "query": "level = 'ERROR'",
+          "query": "level = 'ERROR' AND $Node=server",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -225,7 +226,7 @@
               "type": "count"
             }
           ],
-          "query": "levle = 'ERROR'",
+          "query": "levle = 'ERROR' AND $Node=server",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -253,7 +254,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": "0",
+          "min": null,
           "show": true
         },
         {
@@ -328,7 +329,7 @@
               "type": "count"
             }
           ],
-          "query": "levle = 'WARNING'",
+          "query": "levle = 'WARNING' AND $Node=server",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -356,7 +357,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": "0",
+          "min": null,
           "show": true
         },
         {
@@ -429,7 +430,7 @@
               "type": "count"
             }
           ],
-          "query": "levle = 'INFO'",
+          "query": "levle = 'INFO' AND $Node=server",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -457,7 +458,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": "0",
+          "min": null,
           "show": true
         },
         {
@@ -480,7 +481,7 @@
       "fontSize": "100%",
       "gridPos": {
         "h": 9,
-        "w": 9,
+        "w": 10,
         "x": 0,
         "y": 4
       },
@@ -512,12 +513,24 @@
           "pattern": "/.*/",
           "thresholds": [],
           "type": "number",
-          "unit": "short"
+          "unit": "dthms"
         }
       ],
       "targets": [
         {
           "bucketAggs": [
+            {
+              "fake": true,
+              "field": "server.keyword",
+              "id": "4",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
             {
               "fake": true,
               "field": "job.keyword",
@@ -550,7 +563,7 @@
               "type": "max"
             }
           ],
-          "query": "level = 'ERROR'",
+          "query": "level = 'ERROR' AND $Node=server",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -568,8 +581,8 @@
       "fill": 1,
       "gridPos": {
         "h": 19,
-        "w": 12,
-        "x": 9,
+        "w": 11,
+        "x": 10,
         "y": 4
       },
       "id": 8,
@@ -599,13 +612,25 @@
           "bucketAggs": [
             {
               "fake": true,
+              "field": "server.keyword",
+              "id": "4",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "15"
+              },
+              "type": "terms"
+            },
+            {
+              "fake": true,
               "field": "job.keyword",
               "id": "3",
               "settings": {
                 "min_doc_count": 1,
                 "order": "desc",
                 "orderBy": "1",
-                "size": "10"
+                "size": "15"
               },
               "type": "terms"
             },
@@ -629,6 +654,7 @@
               "type": "max"
             }
           ],
+          "query": "$Node=server",
           "refId": "A",
           "timeField": "@timestamp"
         }
@@ -679,11 +705,12 @@
       "fontSize": "100%",
       "gridPos": {
         "h": 10,
-        "w": 9,
+        "w": 10,
         "x": 0,
         "y": 13
       },
       "id": 10,
+      "links": [],
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
@@ -718,6 +745,18 @@
           "bucketAggs": [
             {
               "fake": true,
+              "field": "server.keyword",
+              "id": "5",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "fake": true,
               "field": "job.keyword",
               "id": "4",
               "settings": {
@@ -748,11 +787,12 @@
               "type": "max"
             }
           ],
+          "query": "$Node=server",
           "refId": "A",
           "timeField": "@timestamp"
         }
       ],
-      "title": "Panel Title",
+      "title": "Completed Jobs",
       "transform": "timeseries_to_rows",
       "type": "table"
     }
@@ -762,7 +802,28 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_IN-FILEBEAT-AB7-PROCESSED}",
+        "hide": 0,
+        "includeAll": true,
+        "label": null,
+        "multi": true,
+        "name": "Node",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\":\"server.keyword\"}",
+        "refresh": 1,
+        "regex": "",
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
     "from": "now-1h",
@@ -794,7 +855,7 @@
     ]
   },
   "timezone": "",
-  "title": "ActiveBatch v7",
+  "title": "ActiveBatch v7 & v10",
   "uid": "E_1w4eaiz",
-  "version": 3
+  "version": 5
 }
