@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1542202550204,
+  "iteration": 1542203077072,
   "links": [],
   "panels": [
     {
@@ -306,7 +306,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": "0",
+          "min": null,
           "show": true
         },
         {
@@ -567,7 +567,7 @@
                 "min_doc_count": 1,
                 "order": "desc",
                 "orderBy": "_term",
-                "size": "15"
+                "size": "10"
               },
               "type": "terms"
             },
@@ -579,7 +579,7 @@
                 "min_doc_count": 1,
                 "order": "desc",
                 "orderBy": "1",
-                "size": "15"
+                "size": "10"
               },
               "type": "terms"
             },
@@ -755,8 +755,11 @@
       {
         "allValue": null,
         "current": {
+          "tags": [],
           "text": "All",
-          "value": "$__all"
+          "value": [
+            "$__all"
+          ]
         },
         "datasource": "in-filebeat-ab7-processed",
         "hide": 0,
