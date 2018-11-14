@@ -39,23 +39,34 @@ docker image rm --force hvbnext/elasticsearch:base
 docker image rm --force hvbnext/kibana:local
 docker image rm --force hvbnext/grafana:local
 
+##################### CONFIGURATION #####################################
 
 docker-compose -f docker-compose-config.yml up -d
+
+#####
 
 # import pipelines in streamsets and streamsets-local
 # import saved objects in kibana
 # register kafka in kafka-manager
+
+#####
 
 docker commit elasticsearch hvbnext/elasticsearch:local-cc
 docker commit kafka-manager hvbnext/kafka-manager:local-cc
 docker commit streamsets hvbnext/streamsets:dev-cc
 docker commit streamsets-local hvbnext/streamsets:local-cc
 
+docker-compose -f docker-compose-config.yml down
+
+#####
+
 docker-compose up -d
 
-# tag images under hvbnext account
+#####
 
 docker push hvbnext/kafka-manager:local-cc
 docker push hvbnext/elasticsearch:local-cc
 docker push hvbnext/streamsets:dev-cc
 docker push hvbnext/streamsets:local-cc
+
+##################### CONFIGURATION #####################################

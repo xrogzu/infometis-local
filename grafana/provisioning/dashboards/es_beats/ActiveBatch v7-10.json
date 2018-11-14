@@ -1,54 +1,4 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_IN-FILEBEAT-AB7-PROCESSED",
-      "label": "in-filebeat-ab7-processed",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "elasticsearch",
-      "pluginName": "Elasticsearch"
-    },
-    {
-      "name": "DS_IN-FILEBEAT-AB7-COMPLETED",
-      "label": "in-filebeat-ab7-completed",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "elasticsearch",
-      "pluginName": "Elasticsearch"
-    }
-  ],
-  "__requires": [
-    {
-      "type": "datasource",
-      "id": "elasticsearch",
-      "name": "Elasticsearch",
-      "version": "5.0.0"
-    },
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "5.2.3"
-    },
-    {
-      "type": "panel",
-      "id": "graph",
-      "name": "Graph",
-      "version": "5.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "singlestat",
-      "name": "Singlestat",
-      "version": "5.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "table",
-      "name": "Table",
-      "version": "5.0.0"
-    }
-  ],
   "annotations": {
     "list": [
       {
@@ -65,8 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": null,
-  "iteration": 1542128519315,
+  "iteration": 1542200785345,
   "links": [],
   "panels": [
     {
@@ -78,7 +27,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_IN-FILEBEAT-AB7-PROCESSED}",
+      "datasource": "in-filebeat-ab7-completed",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -175,7 +124,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_IN-FILEBEAT-AB7-PROCESSED}",
+      "datasource": "in-filebeat-ab7-completed",
       "fill": 3,
       "gridPos": {
         "h": 4,
@@ -278,7 +227,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_IN-FILEBEAT-AB7-PROCESSED}",
+      "datasource": "in-filebeat-ab7-processed",
       "fill": 3,
       "gridPos": {
         "h": 4,
@@ -379,7 +328,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_IN-FILEBEAT-AB7-PROCESSED}",
+      "datasource": "in-filebeat-ab7-processed",
       "fill": 3,
       "gridPos": {
         "h": 4,
@@ -477,7 +426,7 @@
     },
     {
       "columns": [],
-      "datasource": "${DS_IN-FILEBEAT-AB7-COMPLETED}",
+      "datasource": "in-filebeat-ab7-completed",
       "fontSize": "100%",
       "gridPos": {
         "h": 9,
@@ -577,7 +526,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_IN-FILEBEAT-AB7-COMPLETED}",
+      "datasource": "in-filebeat-ab7-completed",
       "fill": 1,
       "gridPos": {
         "h": 19,
@@ -701,7 +650,7 @@
     },
     {
       "columns": [],
-      "datasource": "${DS_IN-FILEBEAT-AB7-COMPLETED}",
+      "datasource": "in-filebeat-ab7-completed",
       "fontSize": "100%",
       "gridPos": {
         "h": 10,
@@ -805,8 +754,11 @@
     "list": [
       {
         "allValue": null,
-        "current": {},
-        "datasource": "${DS_IN-FILEBEAT-AB7-PROCESSED}",
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": "in-filebeat-ab7-processed",
         "hide": 0,
         "includeAll": true,
         "label": null,
@@ -816,6 +768,7 @@
         "query": "{\"find\": \"terms\", \"field\":\"server.keyword\"}",
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
         "tags": [],
@@ -857,5 +810,5 @@
   "timezone": "",
   "title": "ActiveBatch v7 & v10",
   "uid": "E_1w4eaiz",
-  "version": 5
+  "version": 1
 }
